@@ -1,0 +1,44 @@
+using System;
+
+public class Test
+{
+
+    public static void Main()
+    {
+    	// Read the input string from the console
+        string sampleInput = Console.ReadLine();
+
+        if(!string.IsNullOrEmpty(sampleInput))
+        {
+            // Convert string to character Arrayto allow swapping
+            char[] chars = sampleInput.ToCharArray();
+            Permute(chars, 0, chars.Length -1);
+        }
+    }
+
+    private static void Permute(char[] chars, int left, int right)
+    {
+        if(left == right)
+        {
+            // Print the current permutation
+            Console.WriteLine(new string(chars));
+        }
+        else
+        {
+            for(int i=left; i<=right; i++)
+            {
+                Swap(ref chars[left], ref chars[i]);
+                Permute(chars, left +1, right);
+                Swap(ref chars[left], ref chars[i]); //Backtrack
+            }   
+        }
+    }
+
+    private static void Swap(ref char a, ref char b)
+    {
+        char temp = a;
+        a = b;
+        b = temp;
+    }
+    
+}
